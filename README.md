@@ -141,7 +141,7 @@ The pre-built DietPi image ships with the full stack configured: the C Sender co
 
 ### Sender
 
-The [Sender](https://github.com/PartsToPixels/Raspberry/blob/main/Sender/src/sender.c) is a C program that sends frames to the FPGA over raw Ethernet at 240 FPS, pinned to CPU 1.
+The [Sender](https://github.com/TheSamGilman/PartsToPixels/blob/main/Sender/src/sender.c) is a C program that sends frames to the FPGA over raw Ethernet at 240 FPS, pinned to CPU 1.
 
 ```bash
 # Build
@@ -162,7 +162,7 @@ make
 
 ### Director / Player
 
-The [Director](https://github.com/PartsToPixels/Raspberry/blob/main/Director/src/direct.ts) is the playback daemon, pinned to CPU 2.
+The [Director](https://github.com/TheSamGilman/PartsToPixels/blob/main/Director/src/direct.ts) is the playback daemon, pinned to CPU 2.
 
 ```bash
 # Install
@@ -182,11 +182,11 @@ npm run build
 
 **How it works** - The Director loads a movie definition, creates a headless skia-canvas, and passes both to the Player. On each frame, the Player renders onto the canvas and the Director pushes the raw RGBA pixel buffer to a Redis list (`player:frames`). The Director also subscribes to brightness updates from the Sensors daemon and applies them to all rendered colors.
 
-**Player** - The [Player](https://github.com/PartsToPixels/Raspberry/blob/main/Player/src/player.ts) is not a separate process. It's a canvas animation framework that takes a canvas and a movie definition, builds GSAP timelines, and renders frame-by-frame at 240 FPS. The Player is environment-agnostic; it works anywhere there's a Canvas API and GSAP, including embedded systems with skia-canvas, browsers, or any Node.js environment. Adding a new animation is just writing a timeline function; no class inheritance or registration needed.
+**Player** - The [Player](https://github.com/TheSamGilman/PartsToPixels/blob/main/Player/src/player.ts) is not a separate process. It's a canvas animation framework that takes a canvas and a movie definition, builds GSAP timelines, and renders frame-by-frame at 240 FPS. The Player is environment-agnostic; it works anywhere there's a Canvas API and GSAP, including embedded systems with skia-canvas, browsers, or any Node.js environment. Adding a new animation is just writing a timeline function; no class inheritance or registration needed.
 
 ### Sensors
 
-The [Sensors](https://github.com/PartsToPixels/Raspberry/blob/main/Sensors/src/sense.ts) daemon reads a **BH1750FVI** ambient light sensor over I2C and publishes a brightness value (1-100) to Redis, pinned to CPU 0.
+The [Sensors](https://github.com/TheSamGilman/PartsToPixels/blob/main/Sensors/src/sense.ts) daemon reads a **BH1750FVI** ambient light sensor over I2C and publishes a brightness value (1-100) to Redis, pinned to CPU 0.
 
 ```bash
 # Install
