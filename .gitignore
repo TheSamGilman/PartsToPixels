@@ -1,0 +1,5 @@
+.DS_Store
+node_modules/
+dist/
+nohup.out
+package-lock.json

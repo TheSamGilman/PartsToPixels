@@ -1,0 +1,20 @@
+{
+  "name": "rasp",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/direct.js"
+  },
+  "dependencies": {
+    "@myled/player": "file:../Player",
+    "gsap": "^3.13.0",
+    "ioredis": "^5.8.2",
+    "skia-canvas": "^3.0.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

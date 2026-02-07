@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+NODE="/root/.nvm/versions/node/v23.6.0/bin/node"
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+cd "$SCRIPT_DIR"
+SCRIPT="./dist/sense.js"
+
+# Find and kill only node processes running this specific script
+PIDS=$(pgrep -f "$SCRIPT" || true)
+if [ -n "$PIDS" ]; then
+  echo "Killing PIDs: $PIDS"
+  echo "$PIDS" | xargs kill -9
+fi
+
+nohup taskset -c 0 "$NODE" "$SCRIPT" >/dev/null 2>&1 &
+disown
