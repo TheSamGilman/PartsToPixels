@@ -220,7 +220,7 @@ You will need a case to house your components, align the LEDs, and mount it to a
 
 Ideal materials are acrylic or aluminum. Acrylic cases can be assembled by all levels, while aluminum cases require AC/DC TIG welding skills, so probably start with acrylic unless you are a TIG welder or want to spend a year learning that skill.
 
-Open [`PartsToPixels-Case-4.2.FCStd`](https://github.com/PartsToPixels/Casing/blob/main/PartsToPixels-Case-4.2.FCStd) in [FreeCAD](https://www.freecad.org/) (0.21+). Each panel is a separate body that can be individually exported to DXF for laser cutting.
+Open [`PartsToPixels-Case-4.2.FCStd`](https://github.com/TheSamGilman/PartsToPixels/blob/main/PartsToPixels-Case-4.2.FCStd) in [FreeCAD](https://www.freecad.org/) (0.21+). Each panel is a separate body that can be individually exported to DXF for laser cutting.
 
 ## Components
 
