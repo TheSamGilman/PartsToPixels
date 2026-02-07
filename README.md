@@ -220,7 +220,7 @@ You will need a case to house your components, align the LEDs, and mount it to a
 
 Ideal materials are acrylic or aluminum. Acrylic cases can be assembled by all levels, while aluminum cases require AC/DC TIG welding skills, so probably start with acrylic unless you are a TIG welder or want to spend a year learning that skill.
 
-Open [`PartsToPixels-Case-4.2.FCStd`](https://github.com/TheSamGilman/PartsToPixels/blob/main/PartsToPixels-Case-4.2.FCStd) in [FreeCAD](https://www.freecad.org/) (0.21+). Each panel is a separate body that can be individually exported to DXF for laser cutting.
+Open [`PartsToPixels-Case-4.2.FCStd`](https://github.com/TheSamGilman/PartsToPixels/blob/main/PartsToPixels-Case-4.2.FCStd) in FreeCAD (0.21+). Each panel is a separate body that can be individually exported to DXF for laser cutting.
 
 ## Components
 
@@ -236,11 +236,11 @@ You don't need to do any of this unless you're curious - it's all pre-configured
 
 ### OS and System
 
-- Flash [DietPi](https://dietpi.com/) to an SD card for the Raspberry Pi 5
+- Flash DietPi to an SD card for the Raspberry Pi 5
 - Walk through the DietPi first-boot wizard - set passwords, disable serial UART, skip optional software
 - Configure hostname
 - Set up SSH key authentication, disable password login, and configure a reverse SSH proxy for remote access
-- Lock DNS to [Google](https://developers.google.com/speed/public-dns) and [Cloudflare](https://developers.cloudflare.com/1.1.1.1/) resolvers and make the config immutable with `chattr +i`
+- Lock DNS to Google and Cloudflare resolvers and make the config immutable with `chattr +i`
 
 ### Network
 
@@ -250,7 +250,7 @@ The Pi uses three network interfaces, each with a dedicated role:
 
 - **eth1** (USB Ethernet dongle) - primary internet connection. Since eth0 is reserved for the FPGA, a USB dongle provides the actual network connectivity. This gets the lowest metric so all outbound traffic routes here by default.
 
-- **wlan0** (WiFi) - backup internet with a higher metric than eth1. DietPi's built-in WiFi management conflicts with manual configuration, so the global [wpa_supplicant](https://wiki.archlinux.org/title/Wpa_supplicant) service needs to be disabled and replaced with a per-interface config. WiFi power management must also be disabled via a postboot script; the default power saving introduces latency spikes that interfere with the real-time pipeline.
+- **wlan0** (WiFi) - backup internet with a higher metric than eth1. DietPi's built-in WiFi management conflicts with manual configuration, so the global wpa_supplicant service needs to be disabled and replaced with a per-interface config. WiFi power management must also be disabled via a postboot script; the default power saving introduces latency spikes that interfere with the real-time pipeline.
 
 Each interface needs its own drop-in config under `/etc/network/interfaces.d/` with explicit metrics to control routing priority. The main interfaces file is replaced with a single `source` directive and made immutable with `chattr +i` to prevent DietPi from overwriting it on updates.
 
@@ -263,7 +263,7 @@ Each interface needs its own drop-in config under `/etc/network/interfaces.d/` w
 
 ### Hardware
 
-- Enable [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) for the BH1750 ambient light sensor
+- Enable I2C for the BH1750 ambient light sensor
 
 ### Packages
 
@@ -274,11 +274,11 @@ Each interface needs its own drop-in config under `/etc/network/interfaces.d/` w
 - `i2c-tools` - I2C bus debugging for the BH1750 sensor
 - `dnsutils` - DNS utilities
 - `curl`, `git`, `unzip`
-- `python3` - required by [node-gyp](https://github.com/nodejs/node-gyp) for compiling native Node.js addons
+- `python3` - required by node-gyp for compiling native Node.js addons
 
 **Runtime:**
 
-- [Node.js](https://nodejs.org/) v23 via [nvm](https://github.com/nvm-sh/nvm)
+- [Node.js](https://nodejs.org/) v23 via nvm
 - [Redis](https://redis.io/) built from source - runs ephemeral (no persistence) over a Unix socket with a dedicated `redis` system user
 
 **C libraries:**
@@ -287,7 +287,7 @@ Each interface needs its own drop-in config under `/etc/network/interfaces.d/` w
 
 **Native Node.js addons** (compiled during `npm install`):
 
-- [skia-canvas](https://github.com/nicpeck/skia-canvas) - headless Canvas rendering for the Player (prebuilt ARM64 binaries available, falls back to source compilation requiring a [Rust](https://www.rust-lang.org/) toolchain)
+- [skia-canvas](https://github.com/nicpeck/skia-canvas) - headless Canvas rendering for the Player (prebuilt ARM64 binaries available, falls back to source compilation requiring a Rust toolchain)
 - [i2c-bus](https://github.com/fivdi/i2c-bus) - I2C communication for the Sensors daemon (requires `python3` and `node-gyp`)
 
 **Sender runtime:**
